@@ -16,7 +16,7 @@ import {
 } from './types';
 
 if (process.env.BOT_TOKEN == null) throw Error('BOT_TOKEN is missing.');
-export const bot = new Bot<MyContext>(`$process.env.BOT_TOKEN`);
+export const bot = new Bot<MyContext>(`${process.env.BOT_TOKEN}`);
 
 // Install session middleware, and define the initial session value.
 function initial(): SessionData {
