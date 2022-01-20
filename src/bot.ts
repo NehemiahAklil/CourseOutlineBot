@@ -1,6 +1,5 @@
-import express from 'express';
 import { main } from './menu';
-import { Bot, session, webhookCallback } from 'grammy';
+import { Bot, session } from 'grammy';
 import { InlineQueryResult } from 'typegram';
 import { coursesInfo } from './course_map';
 //Config dotenv to map .env files and environmental variables
@@ -17,7 +16,7 @@ import {
 } from './types';
 
 if (process.env.BOT_TOKEN == null) throw Error('BOT_TOKEN is missing.');
-export const bot = new Bot<MyContext>(<string>process.env.BOT_TOKEN);
+export const bot = new Bot<MyContext>(`$process.env.BOT_TOKEN`);
 
 // Install session middleware, and define the initial session value.
 function initial(): SessionData {
@@ -100,9 +99,3 @@ bot.on('inline_query', async (ctx) => {
 //     console.log(new Date(), 'Bot starts as', botInfo.username);
 //   },
 // });
-
-const app = express(); // or whatever you're using
-app.use(express.json()); // parse the JSON request body
-
-// 'express' is also used as default if no argument is given.
-app.use(webhookCallback(bot, 'express'));
